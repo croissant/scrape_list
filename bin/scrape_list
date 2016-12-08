@@ -1,0 +1,34 @@
+#!/usr/bin/env ruby
+require 'bundler'
+Bundler.require
+require 'active_support/dependencies'
+require 'optparse'
+
+ActiveSupport::Dependencies.autoload_paths << File.expand_path('../lib')
+
+params = {
+  url: nil,
+  url_rule: nil,
+  list_rule: nil,
+  item_rule: nil
+}
+OptionParser.new do |opt|
+  opt.on('-u xxx') { |var| params[:url] = var }
+  opt.on('-r xxx') { |var| params[:url_rule] = var }
+  opt.on('-l xxx') { |var| params[:list_rule] = var }
+  opt.on('-i xxx') { |var| params[:item_rule] = var }
+  opt.parse! ARGV
+end
+
+if false == params.values.select(&:nil?).empty?
+  puts "Usage: bin/#{File.basename(__FILE__)} -u <url> -r <url rule> -l <list rule> -i <item rule>"
+  exit(1)
+end
+
+rule = ScrapeList::Rule.new
+rule.url_rule = Regexp.compile(params[:url_rule])
+rule.list_rule = params[:list_rule]
+rule.item_rule = params[:item_rule]
+result = ScrapeList.request(params[:url], rule)
+
+p result
