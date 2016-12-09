@@ -3,3 +3,4 @@ require 'bundler'
 Bundler.require
 require 'scrape_list'
 require 'scrape_list/rule'
+require 'webmock/rspec'

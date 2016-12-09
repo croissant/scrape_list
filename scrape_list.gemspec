@@ -23,8 +23,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mechanize', '~> 2.7'
   spec.add_dependency 'concurrent-ruby', '~> 1.0'
   spec.add_dependency 'activesupport', '~> 4'
-  
+
   spec.add_development_dependency 'bundler', '~> 1.13'
   spec.add_development_dependency 'rake', '~> 11.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'webmock', '~> 2.0'
 end
